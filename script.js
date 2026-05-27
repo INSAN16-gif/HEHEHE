@@ -1,93 +1,99 @@
-// Grab DOM elements
+// ==========================================
+// GLOBAL DOM ELEMENT REFS
+// ==========================================
 const openBtn = document.getElementById('open-btn');
 const giftContainer = document.getElementById('gift-container');
 const surpriseScreen = document.getElementById('surprise-screen');
-const mediaHolder = document.getElementById('media-holder');
 const bgMusic = document.getElementById('bg-music');
 const sfxTap = document.getElementById('sfx-tap');
-const sfxVictory = document.getElementById('sfx-victory'); // 👈 NEW: Grab victory element
+const sfxVictory = document.getElementById('sfx-victory');
 
-// Game State Tracker variables
+// Game State Tracker Variables
 let tapCount = 0;
 const maxTaps = 5;
 
-// Add click listener to the OPEN button
+// ==========================================
+// SCREEN 1: OPEN BUTTON CLICK LOGIC
+// ==========================================
 openBtn.addEventListener('click', () => {
-    
+    // 1. Swap background gradient instantly to the surprise/image background rules
     document.body.classList.add('celebrate-bg');
 
-    // Initial Open Confetti
-    confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 } });
+    // 2. Fire the initial open confetti burst
+    confetti({ 
+        particleCount: 150, 
+        spread: 80, 
+        origin: { y: 0.6 } 
+    });
 
+    // 3. Toggle layout screens visibility
     giftContainer.style.display = 'none';
     surpriseScreen.classList.remove('hidden');
 
-    if (mediaHolder.innerHTML === '') {
-        // Left Video
-        const leftVideo = document.createElement('video');
-        leftVideo.src = 'asset2.mp4';
-        leftVideo.classList.add('surprise-media');
-        leftVideo.autoplay = true;
-        leftVideo.loop = true;
-        leftVideo.muted = true;
-        leftVideo.playsInline = true;
-        
-        // Center Picture
+    // 4. PERFORMANCE FIX: Play preloaded HTML videos instantly to eliminate delays
+    const leftVid = document.getElementById('left-video');
+    const rightVid = document.getElementById('right-video');
+    if (leftVid) leftVid.play().catch(e => console.log("Left video autoplay block bypassed."));
+    if (rightVid) rightVid.play().catch(e => console.log("Right video autoplay block bypassed."));
+
+    // 5. Inject the center square image container dynamically
+    const imgContainer = document.getElementById('image-container');
+    if (imgContainer && imgContainer.innerHTML === '') {
         const centerImg = document.createElement('img');
-        centerImg.src = 'asset1.jpg'; // First picture shown
+        centerImg.src = 'asset1.jpg'; // The first square photo (slippers)
         centerImg.alt = 'Your Gift';
-        centerImg.classList.add('surprise-media');
         centerImg.id = 'gift-pic';
 
-        // Add the click listener to the picture for the tap mini-game
+        // Bind the tap game event click listener directly to the center picture
         centerImg.addEventListener('click', handlePictureTap);
-
-        // Right Video
-        const rightVideo = document.createElement('video');
-        rightVideo.src = 'asset2.mp4';
-        rightVideo.classList.add('surprise-media');
-        rightVideo.autoplay = true;
-        rightVideo.loop = true;
-        rightVideo.muted = true;
-        rightVideo.playsInline = true;
-
-        mediaHolder.appendChild(leftVideo);
-        mediaHolder.appendChild(centerImg);
-        mediaHolder.appendChild(rightVideo);
+        imgContainer.appendChild(centerImg);
     }
 
-    // Play background music loop continuous
+    // 6. Play the main background looping track smoothly
     bgMusic.play().catch(error => {
-        console.log("Audio waiting for user verification handle.", error);
-        window.addEventListener('click', () => { bgMusic.play(); }, { once: true });
+        console.log("Audio waiting for explicit user interaction context handler.", error);
+        // Fallback strategy just in case mobile tracking blocks it initially
+        window.addEventListener('click', () => { 
+            bgMusic.play(); 
+        }, { once: true });
     });
 });
 
-// Handle Tapping the Picture Module Logic
+// ==========================================
+// SCREEN 2: TAP SURPRISE GAME MODULE
+// ==========================================
 function handlePictureTap() {
     if (tapCount < maxTaps) {
         tapCount++;
         
-        // 1. Grow the tracking progress bar width
+        // 1. Grow the visual tracking progress bar width percentage formula
         const progressBar = document.getElementById('progress-bar');
-        const percentage = (tapCount / maxTaps) * 100;
-        progressBar.style.width = `${percentage}%`;
+        if (progressBar) {
+            const percentage = (tapCount / maxTaps) * 100;
+            progressBar.style.width = `${percentage}%`;
+        }
 
-        // 2. Check if they hit the target click threshold
+        // 2. Evaluate Click Conditions
         if (tapCount === maxTaps) {
+            // 🎉 VICTORY TARGET REACHED (5th TAP)
             
-            // 🔊 NEW: Play the victory sound effect on the 5th press!
+            // Play the unique victory sound effect track
             sfxVictory.currentTime = 0;
-            sfxVictory.play().catch(e => console.log("Audio waiting for interaction."));
+            sfxVictory.play().catch(e => console.log("Victory SFX audio context block handled."));
 
-            // Unlocked! Swap to the second picture asset resource file path
+            // Swap center image element resource link path to the final secret image asset
             const centerImg = document.getElementById('gift-pic');
-            centerImg.src = 'asset3.jpg'; 
+            if (centerImg) {
+                centerImg.src = 'asset3.jpg'; // Changes to your final green witch cat image
+            }
             
-            // Update Text layout
-            document.getElementById('instruction-text').innerHTML = "✨ YIIIS GALING TAINA! ✨";
+            // Update UI message text header
+            const instructionText = document.getElementById('instruction-text');
+            if (instructionText) {
+                instructionText.innerHTML = "✨ TRUE PRIZE CLAIMED! ENJOY YOUR SPECIAL DAY! ✨";
+            }
             
-            // Victory Confetti Storm!
+            // Unleash the massive victory confetti storm layout pop
             confetti({ particleCount: 200, spread: 100, origin: { y: 0.6 } });
             setTimeout(() => {
                 confetti({ particleCount: 70, angle: 60, spread: 60, origin: { x: 0 } });
@@ -95,9 +101,9 @@ function handlePictureTap() {
             }, 250);
             
         } else {
-            // 🔊 Play regular tap sound effect for clicks 1, 2, 3, and 4
+            // 🔊 STANDARD TAPS (Clicks 1, 2, 3, and 4)
             sfxTap.currentTime = 0;
-            sfxTap.play().catch(e => console.log("Audio waiting for interaction."));
+            sfxTap.play().catch(e => console.log("Tap SFX audio context block handled."));
         }
     }
 }
