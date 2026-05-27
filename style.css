@@ -127,12 +127,12 @@ p {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
-/* 📸 THE CENTER IMAGE: Big, prominent wide box */
 #gift-pic {
-    flex: 2;                  /* Gives the middle box double the priority/space */
-    max-width: 220px;         /* Makes it significantly wider than the side videos */
-    height: 200px;            /* Gives it that solid, wider, prominent square shape */
-    object-fit: cover;        /* Keeps your image from stretching vertically */
+    flex: 2;                  /* Keeps the horizontal priority space */
+    max-width: 220px;         
+    width: 220px;             /* 👈 FIX 1: Explicitly sets the width */
+    height: 220px;            /* 👈 FIX 2: Matches the width exactly to force a perfect square */
+    object-fit: cover;        /* 👈 FIX 3: Cuts and crops any tall portrait photo cleanly into the square shape */
     border: 3px solid #ff4757;
     border-radius: 12px;
     cursor: pointer;
