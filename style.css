@@ -1,0 +1,167 @@
+/* Reset and global layout */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Starting Background: Emptiness (Pure Black to Dark Charcoal Grey) */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #000000 0%, #1c1d22 100%);
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    text-align: center;
+    padding: 20px;
+    overflow-x: hidden;
+    transition: background 0.8s ease; /* Blends the color shift into the image smoothly */
+}
+
+/* 🔥 UPDATED: Changes to a custom image with a dark layout tint when opened */
+body.celebrate-bg {
+    background: linear-gradient(rgba(15, 20, 30, 0.75), rgba(15, 20, 30, 0.75)), url('bg_surprise.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+/* Screen 1: Gift Box Layout */
+#gift-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: float 3s ease-in-out infinite;
+}
+
+.gift-box-icon {
+    font-size: 80px;
+    margin-bottom: 10px;
+}
+
+h1 {
+    color: #47ff50;
+    margin-bottom: 10px;
+    font-size: 2rem;
+}
+
+p {
+    color: #a4b0be;
+    margin-bottom: 30px;
+}
+
+#open-btn {
+    padding: 15px 40px;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    background: linear-gradient(135deg, #ff4757, #ff6b81);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(255, 71, 87, 0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+#open-btn:active {
+    transform: scale(0.95);
+}
+
+/* Screen 2: Surprise Card Presentation */
+#surprise-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    padding: 15px;
+}
+
+.card-content {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    padding: 25px;
+    border-radius: 24px;
+    border: 2px solid #47ff47;
+    box-shadow: 0 0 50px rgba(255, 237, 71, 0.3);
+    width: 95vw;
+    max-width: 850px;
+}
+
+#media-holder {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; 
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.surprise-media {
+    width: 100%;
+    max-width: 180px;  
+    height: 320px;     
+    object-fit: cover; 
+    border: 3px solid #ffffff;
+    border-radius: 16px; 
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+}
+
+#gift-pic {
+    max-width: 300px;  
+    height: 300px;     
+    border: 4px solid #56ff47; 
+    border-radius: 20px;
+    cursor: pointer; /* Makes it clear that the image can be clicked */
+    transition: transform 0.1s ease;
+}
+
+/* Quick visual pulse feedback when tapping the image */
+#gift-pic:active {
+    transform: scale(0.95);
+}
+
+#instruction-text {
+    font-size: 1.1rem;
+    color: #ceff47;
+    font-weight: bold;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+/* 📊 NEW: PROGRESS BAR TRACK STYLING */
+#progress-container {
+    width: 100%;
+    max-width: 300px;
+    height: 16px;
+    background-color: #1c1d22;
+    border-radius: 10px;
+    margin: 0 auto;
+    border: 2px solid #57606f;
+    overflow: hidden;
+}
+
+#progress-bar {
+    width: 0%; /* Starts empty */
+    height: 100%;
+    background: linear-gradient(90deg, #2ed573, #7bed9f); /* Vibrant celebration green */
+    transition: width 0.2s ease;
+}
+
+.hidden {
+    display: none !important;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
