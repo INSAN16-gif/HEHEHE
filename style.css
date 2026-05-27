@@ -106,16 +106,16 @@ p {
     flex-wrap: nowrap; /* 👈 FIXED: Prevents elements from breaking into top and bottom rows */
     justify-content: center;
     align-items: center;
-    gap: 2.5vw;        /* 👈 Scale the spacing dynamically based on screen width */
+    gap: 1.5vw;        /* 👈 Scale the spacing dynamically based on screen width */
     margin: 20px 0;
     width: 100%;
 }
 
 /* 🎥 THIS CONTROLS THE LEFT & RIGHT VIDEOS */
 .surprise-media {
-    width: 22vw;       /* 👈 Dynamic Width: Shrinks perfectly on mobile viewport widths */
+    width: 11vw;       /* 👈 Dynamic Width: Shrinks perfectly on mobile viewport widths */
     max-width: 180px;  /* Keeps it from getting too massive on a computer monitor */
-    height: 40vw;      /* 👈 Dynamic Portrait Height: Adjusts beautifully alongside the width */
+    height: 20vw;      /* 👈 Dynamic Portrait Height: Adjusts beautifully alongside the width */
     max-height: 320px; 
     object-fit: cover; 
     border: 2px solid #ffffff; /* Slightly thinner border for small screens */
@@ -126,9 +126,9 @@ p {
 
 /* 📸 THIS OVERRIDES AND CONTROLS THE CENTER PHOTO ONLY */
 #gift-pic {
-    width: 32vw;       /* 👈 Dynamic Picture Width: Keeps it larger than the videos */
+    width: 220vw;       /* 👈 Dynamic Picture Width: Keeps it larger than the videos */
     max-width: 300px;  
-    height: 320px;     /* 👈 Keeps its prominent look */
+    height: 220px;     /* 👈 Keeps its prominent look */
     max-height: 300px; 
     border: 3px solid #ff4757; 
     border-radius: 12px;
