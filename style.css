@@ -100,43 +100,46 @@ p {
    FIXED SIDE-BY-SIDE RESPONSIVE MEDIA VIEW
    ========================================== */
 
+/* ==========================================
+   FIXED TRIPTYCH ASPECT RATIO (MOBILE OPTIMIZED)
+   ========================================== */
+
 #media-holder {
     display: flex;
     flex-direction: row;
-    flex-wrap: nowrap; /* 👈 FIXED: Prevents elements from breaking into top and bottom rows */
+    flex-wrap: nowrap;        /* Keeps them strictly side-by-side */
     justify-content: center;
     align-items: center;
-    gap: 1.5vw;        /* 👈 Scale the spacing dynamically based on screen width */
-    margin: 20px 0;
+    gap: 8px;                 /* Clean, tight spacing between the elements */
+    margin: 15px auto;
     width: 100%;
+    max-width: 500px;         /* Keeps the whole layout bounded nicely on mobile */
 }
 
-/* 🎥 THIS CONTROLS THE LEFT & RIGHT VIDEOS */
+/* 🎥 THE VIDEOS: Clean, sleek portrait cards */
 .surprise-media {
-    width: 11vw;       /* 👈 Dynamic Width: Shrinks perfectly on mobile viewport widths */
-    max-width: 180px;  /* Keeps it from getting too massive on a computer monitor */
-    height: 20vw;      /* 👈 Dynamic Portrait Height: Adjusts beautifully alongside the width */
-    max-height: 320px; 
-    object-fit: cover; 
-    border: 2px solid #ffffff; /* Slightly thinner border for small screens */
-    border-radius: 8px; 
-    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
-    transition: transform 0.3s ease;
+    flex: 1;                  /* Allows the videos to scale evenly */
+    max-width: 80px;          /* Restricts the width so they look narrow like your drawing */
+    height: 160px;            /* Tall enough to show the full portrait figure */
+    object-fit: cover;        /* Prevents squishing! Automatically crops instead */
+    border: 2px solid #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
-/* 📸 THIS OVERRIDES AND CONTROLS THE CENTER PHOTO ONLY */
+/* 📸 THE CENTER IMAGE: Big, prominent wide box */
 #gift-pic {
-    width: 220vw;       /* 👈 Dynamic Picture Width: Keeps it larger than the videos */
-    max-width: 300px;  
-    height: 220px;     /* 👈 Keeps its prominent look */
-    max-height: 300px; 
-    border: 3px solid #ff4757; 
+    flex: 2;                  /* Gives the middle box double the priority/space */
+    max-width: 220px;         /* Makes it significantly wider than the side videos */
+    height: 200px;            /* Gives it that solid, wider, prominent square shape */
+    object-fit: cover;        /* Keeps your image from stretching vertically */
+    border: 3px solid #ff4757;
     border-radius: 12px;
     cursor: pointer;
     transition: transform 0.1s ease;
 }
 
-/* Quick visual pulse feedback when tapping the image */
+/* Visual tap bounce click effect */
 #gift-pic:active {
     transform: scale(0.95);
 }
