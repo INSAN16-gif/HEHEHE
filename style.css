@@ -96,32 +96,43 @@ p {
     max-width: 850px;
 }
 
+/* ==========================================
+   FIXED SIDE-BY-SIDE RESPONSIVE MEDIA VIEW
+   ========================================== */
+
 #media-holder {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap; 
+    flex-wrap: nowrap; /* 👈 FIXED: Prevents elements from breaking into top and bottom rows */
     justify-content: center;
     align-items: center;
-    gap: 20px;
+    gap: 2.5vw;        /* 👈 Scale the spacing dynamically based on screen width */
     margin: 20px 0;
-}
-
-.surprise-media {
     width: 100%;
-    max-width: 180px;  
-    height: 320px;     
-    object-fit: cover; 
-    border: 3px solid #ffffff;
-    border-radius: 16px; 
-    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
 }
 
+/* 🎥 THIS CONTROLS THE LEFT & RIGHT VIDEOS */
+.surprise-media {
+    width: 22vw;       /* 👈 Dynamic Width: Shrinks perfectly on mobile viewport widths */
+    max-width: 180px;  /* Keeps it from getting too massive on a computer monitor */
+    height: 40vw;      /* 👈 Dynamic Portrait Height: Adjusts beautifully alongside the width */
+    max-height: 320px; 
+    object-fit: cover; 
+    border: 2px solid #ffffff; /* Slightly thinner border for small screens */
+    border-radius: 8px; 
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+    transition: transform 0.3s ease;
+}
+
+/* 📸 THIS OVERRIDES AND CONTROLS THE CENTER PHOTO ONLY */
 #gift-pic {
+    width: 32vw;       /* 👈 Dynamic Picture Width: Keeps it larger than the videos */
     max-width: 300px;  
-    height: 300px;     
-    border: 4px solid #56ff47; 
-    border-radius: 20px;
-    cursor: pointer; /* Makes it clear that the image can be clicked */
+    height: 320px;     /* 👈 Keeps its prominent look */
+    max-height: 300px; 
+    border: 3px solid #ff4757; 
+    border-radius: 12px;
+    cursor: pointer;
     transition: transform 0.1s ease;
 }
 
